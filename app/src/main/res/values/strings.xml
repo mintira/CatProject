@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">CatProject</string>
+
+
+    <string name="cat_fact_api">Cat Fact API</string>
+    <string name="cat_image_api">Cat Image API</string>
+    <string name="btn_fact_refresh">Refresh!</string>
+</resources>

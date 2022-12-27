@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/catMainMenuFragment">
+
+
+    <fragment
+        android:id="@+id/catMainMenuFragment"
+        android:name="axons.forfarm.catproject.presentation.cat_main_menu.CatMainMenuFragment"
+        android:label="fragment_cat_main_menu"
+        tools:layout="@layout/fragment_cat_main_menu" />
+    <fragment
+        android:id="@+id/catImageListFragment"
+        android:name="axons.forfarm.catproject.presentation.cat_image_list.CatImageListFragment"
+        android:label="fragment_cat_image_list"
+        tools:layout="@layout/fragment_cat_image_list" />
+    <fragment
+        android:id="@+id/catDetailFragment"
+        android:name="axons.forfarm.catproject.presentation.cat_detail.CatDetailFragment"
+        android:label="fragment_cat_detail"
+        tools:layout="@layout/fragment_cat_detail" />
+    <fragment
+        android:id="@+id/catFactFragment"
+        android:name="axons.forfarm.catproject.presentation.cat_fact.CatFactFragment"
+        android:label="fragment_cat_fact"
+        tools:layout="@layout/fragment_cat_fact" />
+    <fragment
+        android:id="@+id/catBreedsListFragment"
+        android:name="axons.forfarm.catproject.presentation.cat_breeds_list.CatBreedsListFragment"
+        android:label="fragment_cat_breeds"
+        tools:layout="@layout/fragment_cat_breeds" />
+
+
+</navigation>
