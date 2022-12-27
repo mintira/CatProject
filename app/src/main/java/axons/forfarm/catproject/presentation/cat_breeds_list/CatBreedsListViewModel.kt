@@ -41,7 +41,7 @@ class CatBreedsListViewModel @Inject constructor(
     fun init(numberOfBreed : Int) {
         viewModelScope.launch {
             val response = getCatBreedsUseCase(numberOfBreed)
-                response.to
+                //response.to
 
             if (response == null) {
                 //show error toast
