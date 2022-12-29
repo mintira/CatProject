@@ -5,9 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.fragment.findNavController
+import axons.forfarm.catproject.R
 import axons.forfarm.catproject.databinding.FragmentCatBreedsBinding
 import axons.forfarm.catproject.presentation.cat_breeds_list.controller.CatBreedsListEpoxyController
 import axons.forfarm.catproject.presentation.cat_fact.CatFactViewModel
@@ -70,6 +73,25 @@ class CatBreedsListFragment : Fragment(){
         
         viewModel.viewState.observe(viewLifecycleOwner){
             controller.viewState = it
+        }
+
+        viewModel.navigateToCatBreedsDetail.observe(viewLifecycleOwner){
+            e -> e.getContentIfNotHandled()?.let {
+                findNavController().navigate(
+                    R.id.catBreedsDetailFragment,
+                    bundleOf (
+                        "breed" to it.breed,
+                        "country" to it.country,
+                        "coat" to it.coat,
+                        "pattern" to it.pattern
+                    )
+                )
+            }
+        }
+        controller.onClickItem.observe(viewLifecycleOwner){
+            e -> e.getContentIfNotHandled()?.let {
+                viewModel.onClickItem(it)
+            }
         }
 
     }

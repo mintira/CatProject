@@ -2,19 +2,23 @@ package axons.forfarm.catproject.presentation.cat_breeds_list.controller.model
 
 import axons.forfarm.catproject.R
 import axons.forfarm.catproject.databinding.ListItemCatBreedsBinding
+import axons.forfarm.catproject.domain.model.Data
 import axons.forfarm.catproject.domain.model.GetCatBreedsResponse
 import axons.forfarm.catproject.domain.model.GetCatBreedsResponseItem
 import axons.forfarm.catproject.utils.ViewBindingKotlinModel
 
 data class CatBreedsEpoxyModel(
-    private val data: GetCatBreedsResponseItem ,
-    private val callbackOnCLick: (GetCatBreedsResponseItem) -> Unit
+    private val data: Data ,
+    private val callbackOnCLick: (Data) -> Unit
     ):
 ViewBindingKotlinModel<ListItemCatBreedsBinding> (R.layout.list_item_cat_breeds) {
     override fun ListItemCatBreedsBinding.bind() {
         //แปะข้อความเข้าไปใน TextView
-        catBreedsText.text = "data.breed"
+        catBreedsText.text = data.breed
         //catBreedsText คือ id ของ TextView ในไฟล์ layout xml ที่เราสร้างไว้
+        rootView.setOnClickListener {
+            callbackOnCLick.invoke(data)
+        }
     }
 
 }

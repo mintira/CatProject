@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import axons.forfarm.catproject.domain.model.Data
 import axons.forfarm.catproject.domain.model.GetCatBreedsResponse
 import axons.forfarm.catproject.domain.model.GetCatBreedsResponseItem
 import axons.forfarm.catproject.domain.usecase.GetCatBreedsUseCase
@@ -33,15 +34,21 @@ class CatBreedsListViewModel @Inject constructor(
     val toast = _toast.asLiveData()
 
 
-    private val _viewStateItem = MutableLiveData<List<GetCatBreedsResponseItem>>()
+    private val _viewStateItem = MutableLiveData<GetCatBreedsResponse>()
     val viewStateItem = _viewStateItem.asLiveData()
+
+    //Callback Step 1 สร้างตัวแปร LiveData ที่จะใช้ในการส่งค่าตอนเปลี่ยนหน้า
+
+
+    private val _navigateToCatBreedsDetail = MutableLiveData<Event<Data>>()
+    //ต้องเป็น Data เพราะต้องการส่ง แค่ลูกๆ Data ออกไป
+    val navigateToCatBreedsDetail = _navigateToCatBreedsDetail.asLiveData()
 
 
     //ค่าใน LiveData จะถูกเรียกเมื่อมีการเข้าฟังก์ชัน init
     fun init(numberOfBreed : Int) {
         viewModelScope.launch {
-            val response = getCatBreedsUseCase(numberOfBreed)
-                //response.to
+            val response = getCatBreedsUseCase()
 
             if (response == null) {
                 //show error toast
@@ -52,7 +59,12 @@ class CatBreedsListViewModel @Inject constructor(
             }
 
         }
-        _textCatBreedsEpoxy.value = "NewCatBreeds2"
+//        _textCatBreedsEpoxy.value = "NewCatBreeds2"
+    }
+
+    //Callback Step 2 สร้างฟังก์ชันที่จะเรียกในการเปลี่ยนหน้า
+    fun onClickItem(clickItem : Data) {
+        _navigateToCatBreedsDetail.value = Event(clickItem)
     }
 }
 

@@ -31,6 +31,11 @@
         android:name="axons.forfarm.catproject.presentation.cat_breeds_list.CatBreedsListFragment"
         android:label="fragment_cat_breeds"
         tools:layout="@layout/fragment_cat_breeds" />
+    <fragment
+        android:id="@+id/catBreedsDetailFragment"
+        android:name="axons.forfarm.catproject.presentation.cat_breeds_detail.CatBreedsDetailFragment"
+        android:label="fragment_cat_breeds_detail"
+        tools:layout="@layout/fragment_cat_breeds_detail" />
 
 
 </navigation>

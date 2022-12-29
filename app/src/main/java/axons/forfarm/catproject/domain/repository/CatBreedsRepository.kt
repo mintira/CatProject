@@ -12,7 +12,7 @@ class CatBreedsRepository @Inject constructor(
     private val theCatFactApi: TheCatFactApi,
     @Named(DISPATCHERS_UNCONFINED) private val unConfinedDispatcher: CoroutineDispatcher
 ){
-    suspend fun getBreedsDataList(number: Int) = withContext(unConfinedDispatcher) {
-        theCatFactApi.getCatBreeds(number)
+    suspend fun getBreedsDataList() = withContext(unConfinedDispatcher) {
+        theCatFactApi.getCatBreeds()
     }
 }

@@ -14,7 +14,8 @@ interface TheCatFactApi {
 
     @GET("/breeds")
     suspend fun getCatBreeds(
-    @Query("limit") number: Int,
+    //@Query("limit") number: Int,
+//    @Query("page") page: Int,
     ): GetCatBreedsResponse?
 }
 //  เวลาให้ endpoint ใหม่ url เดียวกัน

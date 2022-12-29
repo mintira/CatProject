@@ -1,10 +1,17 @@
 package axons.forfarm.catproject.presentation.cat_breeds_list.controller
 
+import androidx.lifecycle.MutableLiveData
+import axons.forfarm.catproject.domain.model.Data
 import axons.forfarm.catproject.domain.model.GetCatBreedsResponse
 import axons.forfarm.catproject.presentation.cat_breeds_list.controller.model.CatBreedsEpoxyModel
+import axons.forfarm.catproject.utils.Event
+import axons.forfarm.catproject.utils.asLiveData
 import com.airbnb.epoxy.EpoxyController
 
 class CatBreedsListEpoxyController : EpoxyController() {
+    private val _onClickItem = MutableLiveData<Event<Data>>()
+    val onClickItem = _onClickItem.asLiveData()
+
     var viewState: GetCatBreedsResponse? = null
         set(value) {
             field = value
@@ -19,10 +26,12 @@ class CatBreedsListEpoxyController : EpoxyController() {
         val viewState = viewState ?: return
 
         try {
-            viewState.forEach { data ->
+            viewState.data.forEach { data ->
                 CatBreedsEpoxyModel(data){
-
-                }.id("breeds ${data}").addTo(this)
+                    _onClickItem.value = Event(it)
+                }.id("${data.breed}").addTo(this)
+                //id ต้องเป็นค่า unique ไม่ซ้ำกัน
+                //เป็น Keyword ของ Data ที่เราจะใช้ในการแสดงผล
             }
         } catch (e: Exception) {
             e.printStackTrace()
